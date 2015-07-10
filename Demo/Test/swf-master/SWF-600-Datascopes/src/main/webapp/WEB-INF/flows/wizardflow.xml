@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	<!-- By default, the first state is the start state. -->
+	<view-state id="startPage" view="/WEB-INF/views/wizard/startPage.jsp">
+		<on-entry>
+			 <evaluate expression="scopeAction.populateExternalContextData(flowRequestContext)" />
+			 <evaluate expression="scopeAction.populateSWFContextData(flowRequestContext)" /> 
+		</on-entry>
+		<transition on="next" to="showPage2" />			
+	</view-state>
+	
+	<view-state id="showPage2" view="/WEB-INF/views/wizard/page2.jsp">
+		<transition on="next" to="showPage3" />			
+	</view-state>
+
+	<view-state id="showPage3" view="/WEB-INF/views/wizard/page3.jsp">
+		<transition on="back" to="showPage2"/>
+		<transition on="next" to="showPage4" />			
+	</view-state>
+
+	<view-state id="showPage4" view="/WEB-INF/views/wizard/page4.jsp">
+		<transition on="back" to="showPage3"/>
+		<transition on="finish" to="endOk"/>
+	</view-state>
+
+	<end-state id="endOk" view="externalRedirect:/index.jsp"/>
+</flow> 

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	<var name="singoloUserServlet" class="corso.spring.wf2.demo.views.model.User" />
+	<var name="singoloUserSwf" class="corso.spring.wf2.demo.views.model.User"/>
+	<var name="userBean2" class="corso.spring.wf2.demo.views.model.User"/>
+	<var name="userBeanEvent" class="corso.spring.wf2.demo.views.model.User"/>
+	
+	
+	<var name="userGroup" class="corso.spring.wf2.demo.views.model.UserGroup" />
+	<var name="userGroupConversation" class="corso.spring.wf2.demo.views.model.UserGroup" />
+	
+	
+	
+	<!-- By default, the first state is the start state. -->
+	<view-state id="startPage" view="/WEB-INF/views/datascopes/startPage.jsp">
+		<on-entry>
+			<evaluate expression="dataAction.populateExternalContextData(flowRequestContext)" />
+			<evaluate expression="dataAction.populateSWFContextData(flowRequestContext)" />
+			<set name="singoloUserServlet" value="externalContext.sessionMap.user"  type="corso.spring.wf2.demo.views.model.User"  />
+			<set name="singoloUserSwf" value="viewScope.user"  type="corso.spring.wf2.demo.views.model.User"  />
+		</on-entry>
+		<transition on="next" to="showPage1" />			
+	</view-state>
+	
+	<view-state id="showPage1" view="/WEB-INF/views/datascopes/page1.jsp">
+			<on-entry>
+				<set name="userGroupConversation" value="conversationScope.userGroup"  type="corso.spring.wf2.demo.views.model.UserGroup"  />
+			</on-entry>
+			<transition on="next" to="showPage2" />			
+	</view-state>
+    
+	<view-state id="showPage2" view="/WEB-INF/views/datascopes/page2.jsp">
+			<on-entry>
+				<evaluate expression="dataAction.echoUser(flowScope.userGroup.users[2])" result="flowScope.userEcho" result-type="corso.spring.wf2.demo.views.model.User" />
+				<set name="conversationScope.userNew" value="flowScope.user"  type="corso.spring.wf2.demo.views.model.User"  />
+			</on-entry>
+			<transition on="next" to="showPage3" />			
+	</view-state>
+
+	<view-state id="showPage3" view="/WEB-INF/views/datascopes/page3.jsp">
+			<on-entry>
+				<set name="userBean2" value="flowScope.userGroup.users[2]"  type="corso.spring.wf2.demo.views.model.User"  />
+			</on-entry>		
+		<transition on="back" to="showPage2"/>
+		<transition on="next" to="endOk"/>
+	</view-state>
+
+	<end-state id="endOk" view="externalRedirect:/index.jsp"/>
+</flow> 

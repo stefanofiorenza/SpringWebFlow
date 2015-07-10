@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	<var name="userRisultato" class="corso.spring.wf2.demo.actions.model.User"/>
+	
+		
+	<!-- By default, the first state is the start state. -->
+	<view-state id="starter" view="/WEB-INF/views/actiontype/startPage.jsp">
+	
+		<transition on="pojo" to="confermaUser">
+			<evaluate 	expression="userActionPojo.getUser()"
+						result="flowScope.userReturn" 
+						result-type="corso.spring.wf2.demo.actions.model.User"/>
+			<set name="userRisultato" value="flowScope.userReturn" />
+		</transition>
+		<transition on="action" to="confermaUserAction" />
+		<transition on="multiaction" to="confermaUserMultiAction" />
+						
+	</view-state>
+	
+	 <action-state id="confermaUserAction">
+        <evaluate expression="userAction" />
+        <set name="userRisultato" value="flowScope.userReturn" />
+        <transition to="confermaUser" />
+    </action-state>
+	
+	<action-state id="confermaUserMultiAction">
+        <evaluate expression="userMultiAction.getUser" />
+			<set name="userRisultato" value="flowScope.userReturn" />
+        <transition to="confermaUser" />
+    </action-state>
+	
+	<end-state id="confermaUser" view="/WEB-INF/views/actiontype/confermaInserimento.jsp" />
+	
+</flow> 

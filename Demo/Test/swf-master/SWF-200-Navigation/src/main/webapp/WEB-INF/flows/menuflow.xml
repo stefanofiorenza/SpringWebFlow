@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	<!-- By default, the first state is the start state. -->
+	<view-state id="start" view="/WEB-INF/menu-view/main.jsp">
+		<transition on="green" to="greenEnd" />
+		<transition on="blue" to="blueEnd" />	
+		<transition on="red" to="redEnd" />			
+	</view-state>
+
+	<end-state id="greenEnd" view="/WEB-INF/menu-view/greenPage.jsp"/>
+	<end-state id="redEnd" view="/WEB-INF/menu-view/redPage.jsp"/>
+	<end-state id="blueEnd" view="/WEB-INF/menu-view/bluePage.jsp"/>
+
+</flow> 

@@ -1,1 +1,7 @@
 Temp/
+Demo/Test/.metadata/
+Demo/Test/swf-master/*/.settings/
+Demo/Test/Servers/
+*.project
+*.classpath
+

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
+		
+	<!--  Demo Action Implementation -->	
+	<bean id="basicAction" class="corso.spring.wf2.demo.views.actions.BasicAction" >
+		<property name="service" ref="basicService" />
+	</bean>
+	
+	<bean id="scopeAction" class="corso.spring.wf2.demo.views.actions.ScopeAction" />
+	
+	<bean id="dataAction" class="corso.spring.wf2.demo.views.actions.DataAction" />
+		
+</beans>

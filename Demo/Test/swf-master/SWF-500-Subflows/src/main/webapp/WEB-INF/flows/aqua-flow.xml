@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	
+	<var name="utenteAqua" class="corso.spring.wf2.demo.subflows.model.Utente" />
+	
+	<!-- By default, the first state is the start state. -->
+	<view-state id="start" model="utenteAqua" view="/WEB-INF/flussoAqua/pageA1.jsp">
+		<binder>
+            <binding property="nome"/>
+            <binding property="cognome"/>
+        </binder>
+		<transition on="next" to="page2" />
+	</view-state>	
+	
+	<view-state id="page2" model="utenteAqua" view="/WEB-INF/flussoAqua/pageA2.jsp">
+		<binder>
+            <binding property="via"/>
+            <binding property="cap"/>
+           	<binding property="citta"/>
+           	<binding property="provincia"/>
+        </binder>	
+		<transition on="next" to="page3" />
+	</view-state>	
+	
+	<view-state id="page3" model="utenteAqua" view="/WEB-INF/flussoAqua/pageA3.jsp">
+		<binder>
+            <binding property="telefono"/>
+            <binding property="cellulare"/>
+           	<binding property="email"/>
+           	<binding property="fax"/>
+        </binder>
+		<transition on="end" to="endAqua" />
+	</view-state>
+	
+	<end-state id="endAqua" >		
+		<output name="utenteAqua" />
+	</end-state>
+	
+	
+</flow> 

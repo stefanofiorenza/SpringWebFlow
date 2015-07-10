@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+		
+	
+	<!-- By default, the first state is the start state. -->
+	<view-state id="startMainFlow" view="/WEB-INF/main/login.jsp">
+		<transition on="login" to="subAquaFlow" />
+	</view-state>
+	
+	<subflow-state id="subAquaFlow" subflow="aqua-flow">
+		<output name="utenteAqua"/>
+		<transition to="endMainFlow">
+			<set name="flowScope.utente" value="utenteAqua" />
+		</transition>
+	</subflow-state>
+	
+	<end-state id="endMainFlow" view="/WEB-INF/main/riepilogoMainFlow.jsp">
+	</end-state>
+	
+</flow> 
