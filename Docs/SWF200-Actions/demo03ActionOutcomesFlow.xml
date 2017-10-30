@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	<view-state id="inputUser" view="/WEB-INF/views/outcomes/actionOutcomesDemo.jsp">
+		<transition on="actionBoolean" to="actionOutcomeBoolean" />
+		<transition on="actionString" to="actionOutcomeString" />
+		<transition on="actionObject" to="actionOutcomeObject" />
+		<transition on="actionEnum" to="actionOutcomeEnumeration" />
+	</view-state>
+		
+	<action-state id="actionOutcomeObject">
+		<evaluate expression="demoOutcomePojoAction.outcomeObject()" />
+		<transition on="success" to="endOK" />
+		<transition to="endKO" />
+	</action-state>
+	
+	<action-state id="actionOutcomeString">
+		<evaluate expression="demoOutcomePojoAction.outcomeString()" />
+		<transition on="successo" to="endOK" />
+		<transition to="endKO" />
+	</action-state>
+		
+	<decision-state id="actionOutcomeBoolean">
+		<if test="demoOutcomePojoAction.outcomeBooleanObject()" then="endOK" else="endKO" />
+	</decision-state>
+	
+	<action-state id="actionOutcomeEnumeration">
+		<evaluate expression="demoOutcomePojoAction.outcomeEnum()" />
+		<transition on="LUNEDI" to="endLunedi" />
+		<transition on="MARTEDI" to="endMartedi" />
+		<transition to="endKO" />
+	</action-state>
+	
+	
+	
+	<end-state id="endOK" view="/WEB-INF/views/outcomes/outcomeOK.jsp" />
+	<end-state id="endKO" view="/WEB-INF/views/outcomes/outcomeKO.jsp" />
+	<end-state id="endLunedi" view="/WEB-INF/views/outcomes/outcomeEnumLunedi.jsp" />
+	<end-state id="endMartedi" view="/WEB-INF/views/outcomes/outcomeEnumMartedi.jsp" />
+		
+	
+	
+</flow> 

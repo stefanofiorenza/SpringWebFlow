@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	<var name="listUsersResult" class="java.util.ArrayList"/>
+	
+	<var name="userStartFlow" class="corso.spring.wf2.demo.actions.model.User"/>
+	<var name="userRender" class="corso.spring.wf2.demo.actions.model.User"/>
+	<var name="userEntryState" class="corso.spring.wf2.demo.actions.model.User"/>
+	
+	<on-start>
+		<evaluate expression="demoCallsAction.getUserStartFlow()" result="flowScope.startFlowUser" />
+	</on-start>
+	
+	<!-- By default, the first state is the start state. -->
+	<view-state id="inputUser" view="/WEB-INF/views/entrypoints/starterEntryPoint.jsp">
+			
+			<on-entry>
+				<evaluate expression="demoCallsAction.getUserStartState()" result="flowScope.startStateUser" />
+			</on-entry>			
+			
+			<on-render>
+					<evaluate expression="demoCallsAction.getUserRender()" result="flowScope.renderUser"/>
+					<set name="userStartFlow" value="flowScope.startStateUser" />
+					<set name="userRender" value="flowScope.renderUser" />
+					<set name="userEntryState" value="flowScope.startStateUser" />					
+			</on-render>
+							
+			<transition on="getUser1" to="confermaCalls" validate="false">
+				<evaluate expression="demoCallsAction.getUser1()" result="flowScope.user"/>				
+			</transition>
+			<transition on="getUser2" to="confermaCalls" validate="false">
+				<evaluate expression="demoCallsAction.getUser2()" result="flowScope.user"/>				
+			</transition>
+			<transition on="getUser3" to="confermaCalls" validate="false">
+				<evaluate expression="demoCallsAction.getUser3()" result="flowScope.user"/>				
+			</transition>		
+			<on-exit>
+				<evaluate expression="demoCallsAction.getUsersEndState(flowRequestContext)" result="flowScope.listUsers"/>			
+				<set name="listUsersResult"	value="flowScope.listUsers" />	
+			</on-exit>
+	</view-state>	
+		
+	<end-state id="confermaCalls" view="/WEB-INF/views/entrypoints/endEntryPoint.jsp" />
+	
+	<on-end>
+		<evaluate expression="demoCallsAction.endFlowLogic()" />
+	</on-end>
+	
+</flow> 

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	
+	<var name="utenteDaRegistrare" class="corso.spring.wf2.demo.data.model.Utente" />
+	
+	<!-- By default, the first state is the start state. -->
+	<view-state id="start"  view="/WEB-INF/view/anagrafici.jsp">
+		<transition on="next" to="page2" />
+	</view-state>	
+	
+	<view-state id="page2" view="/WEB-INF/view/indirizzo.jsp">
+		<transition on="next" to="page3" />
+	</view-state>	
+	
+	<view-state id="page3" view="/WEB-INF/view/contatti.jsp">
+		<transition on="end" to="endFlow" />
+	</view-state>
+	
+	<end-state id="endFlow" view="/WEB-INF/view/riepilogo.jsp" />		
+		
+	
+</flow> 

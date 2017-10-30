@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+		http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+	
+	<!-- By default, the first state is the start state. -->
+	<view-state id="showPage1" view="/WEB-INF/views/page1.jsp">
+		<transition on="next" to="showPage2" />			
+	</view-state>
+
+	<view-state id="showPage2" view="/WEB-INF/views/page2.jsp">
+		<transition on="back" to="showPage1"/>
+		<transition on="next" to="showPage3" />			
+	</view-state>
+
+	<view-state id="showPage3" view="/WEB-INF/views/page3.jsp">
+		<transition on="back" to="showPage2"/>
+		<transition on="finish" to="endOk"/>
+	</view-state>
+
+	<end-state id="endOk" view="externalRedirect:/index.jsp"/>
+</flow> 

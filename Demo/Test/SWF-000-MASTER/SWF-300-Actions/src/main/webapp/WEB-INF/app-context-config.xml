@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd" >
+		
+	<!--  Demo Action Implementation -->	
+	<bean id="userAction" class="corso.spring.wf2.demo.actions01.impl.UserAction" />
+	<bean id="userActionPojo" class="corso.spring.wf2.demo.actions01.impl.UserActionPojo" />
+	<bean id="userMultiAction" class="corso.spring.wf2.demo.actions01.impl.UserMultiAction" />
+		
+	<!-- demo Action EntryPoints -->	
+	<bean id="demoCallsAction" class="corso.spring.wf2.demo.actions02.calls.DemoCallsAction" />
+		
+	<!-- demo Action Outcomes -->	
+	<bean id="demoOutcomePojoAction" class="corso.spring.wf2.demo.actions03.outcomes.DemoActionOutcomes" />
+		
+
+</beans>
